@@ -18,9 +18,7 @@ const pages = ['About'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
-  const handleOpenNavMenu = (event: {
-    currentTarget: React.SetStateAction<null>;
-  }) => {
+  const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
@@ -64,7 +62,7 @@ function ResponsiveAppBar() {
               aria-controls='menu-appbar'
               aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color=''
+              color='inherit'
             >
               <MenuIcon />
             </IconButton>
