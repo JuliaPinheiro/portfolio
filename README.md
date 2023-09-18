@@ -1,2 +1,3 @@
 # portfolio
-writing a pride document
+ write a brag document
+ 
