@@ -6,7 +6,6 @@ import {
   IconButton,
   Typography,
   Menu,
-  Avatar,
   Button,
   MenuItem,
 } from '@mui/material';
@@ -19,8 +18,9 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorElNav(() => event.currentTarget);
+    setAnchorElNav(event.currentTarget);
   };
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -46,7 +46,14 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position='static' color='primary'>
+    <AppBar
+      position='static'
+      color='primary'
+      sx={{
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',  
+        backdropFilter: 'blur(10px)',  
+      }}
+    >
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Box
@@ -95,9 +102,6 @@ function ResponsiveAppBar() {
           >
             {renderDesktopButtons()}
           </Box>
-          <IconButton sx={{ p: 0 }}>
-            <Avatar alt='Remy Sharp' src='src/assets/photo2.jpeg' />
-          </IconButton>
         </Toolbar>
       </Container>
     </AppBar>
