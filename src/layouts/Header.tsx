@@ -1,111 +1,61 @@
-import React, { useState } from 'react';
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  Button,
-  MenuItem,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
+import { AppBar, Toolbar, Button, Menu, MenuItem } from '@mui/material';
+import { useState } from 'react';
+import React, { ReactNode } from 'react'; // Importe React e ReactNode
 
-const pages = ['About'];
+const pages = ['about'];
 
-function ResponsiveAppBar() {
+interface HeaderProps {
+  children?: ReactNode; // Defina children como ReactNode
+}
+
+function Header({ children }: HeaderProps) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const renderNavMenuItems = () => {
-    return pages.map((page) => (
+  const renderMenuItems = () =>
+    pages.map((page) => (
       <MenuItem key={page} onClick={handleCloseNavMenu}>
-        <Typography textAlign='center'>{page}</Typography>
+        {page}
       </MenuItem>
     ));
-  };
 
-  const renderDesktopButtons = () => {
-    return pages.map((page) => (
-      <Button
-        key={page}
-        onClick={handleCloseNavMenu}
-        sx={{ my: 2, color: 'white', display: 'block' }}
-      >
-        {page}
-      </Button>
-    ));
-  };
+  const desktopButtons = pages.map((page) => (
+    <Button
+      key={page}
+      onClick={handleCloseNavMenu}
+      sx={{ my: 2, color: 'white', display: 'block' }}
+    >
+      {page}
+    </Button>
+  ));
 
   return (
     <AppBar
       position='static'
       color='primary'
       sx={{
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',  
-        backdropFilter: 'blur(10px)',  
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backdropFilter: 'blur(10px)',
+        alignItems: 'center',
       }}
     >
-      <Container maxWidth='xl'>
-        <Toolbar disableGutters>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: 'flex', md: 'none' },
-            }}
-          >
-            <IconButton
-              size='large'
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
-              onClick={handleOpenNavMenu}
-              color='inherit'
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id='menu-appbar'
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {renderNavMenuItems()}
-            </Menu>
-          </Box>
+      <Toolbar>
+        {desktopButtons}
 
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: 'none', md: 'flex' },
-            }}
-          >
-            {renderDesktopButtons()}
-          </Box>
-        </Toolbar>
-      </Container>
+        <Menu
+          anchorEl={anchorElNav}
+          open={Boolean(anchorElNav)}
+          onClose={handleCloseNavMenu}
+        >
+          {renderMenuItems()}
+        </Menu>
+      </Toolbar>
+      {children}
     </AppBar>
   );
 }
 
-export default ResponsiveAppBar;
+export default Header;
