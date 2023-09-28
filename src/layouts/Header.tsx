@@ -5,7 +5,7 @@ import React, { ReactNode } from 'react'; // Importe React e ReactNode
 const pages = ['about'];
 
 interface HeaderProps {
-  children?: ReactNode; // Defina children como ReactNode
+  children?: ReactNode;
 }
 
 function Header({ children }: HeaderProps) {
@@ -37,7 +37,7 @@ function Header({ children }: HeaderProps) {
       position='static'
       color='primary'
       sx={{
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backgroundColor: '#2B354A',
         backdropFilter: 'blur(10px)',
         alignItems: 'center',
       }}
